@@ -45,13 +45,13 @@
             cursor: pointer;
         }
         .footer {
-            background-color: #333;
-            color: white;
-            text-align: center;
-            padding: 10px;
-            position: fixed;
-            bottom: 0;
-            width: 100%;
+  background-color: #333;
+  color: white;
+  text-align: center;
+  padding: 10px;
+  position: relative;
+  margin-top: auto;
+  width: 100%;
         }
     </style>
 </head>
@@ -60,7 +60,7 @@
         <h1>Перевод криптовалюты</h1>
     </div>
     <div class="main-content">
-        <form action="transfer-confirm.html" method="POST">
+        <form id="form1">
             <div class="form-group">
                 <label for="crypto-type">Выберите криптовалюту:</label>
                 <select id="crypto-type" name="crypto-type">
@@ -81,7 +81,14 @@
                 <button type="submit">Перевести</button>
             </div>
         </form>
-        <form action="withdraw-confirm.html" method="POST">
+						<script>
+    var form = document.getElementById('myForm');
+    form.addEventListener('submit', function(event) {
+        event.preventDefault(); // Отменяем отправку формы
+        window.location.href = 'transfer-confirm.html'; // Замените 'home.html' на нужную вам страницу
+    });
+</script>
+        <form id="form2">
             <div class="form-group">
                 <label for="fiat-type">Выберите фиатную валюту:</label>
                 <select id="fiat-type" name="fiat-type">
@@ -107,6 +114,20 @@
                 <button type="submit">Оформить заявку на вывод</button>
             </div>
         </form>
+		
+    <script>
+        var form1 = document.getElementById('form1');
+        form1.addEventListener('submit', function(event) {
+            event.preventDefault();
+            window.location.href = 'transfer-confirm.html'; // Адрес для первой кнопки
+        });
+
+        var form2 = document.getElementById('form2');
+        form2.addEventListener('submit', function(event) {
+            event.preventDefault();
+            window.location.href = 'withdraw-confirm.html'; // Адрес для второй кнопки
+        });
+    </script>
     </div>
     <div class="footer">
         <p>&copy; 2023 Криптовалютная платформа. Все права защищены.</p>

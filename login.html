@@ -22,13 +22,13 @@
             margin: auto;
         }
         .footer {
-            background-color: #333;
-            color: white;
-            text-align: center;
-            padding: 10px;
-            position: fixed;
-            bottom: 0;
-            width: 100%;
+  background-color: #333;
+  color: white;
+  text-align: center;
+  padding: 10px;
+  position: relative;
+  margin-top: auto;
+  width: 100%;
         }
         .button {
             background-color: #4CAF50; /* Green */
@@ -49,13 +49,20 @@
         <h1>Вход</h1>
     </div>
     <div class="main-content">
-        <form action="home.html" method="get">
+        <form id="myForm">
             <label for="email">Email:</label><br>
             <input type="email" id="email" name="email"><br>
             <label for="password">Пароль:</label><br>
             <input type="password" id="password" name="password"><br>
             <input type="submit" value="Войти" class="button">
         </form>
+				<script>
+    var form = document.getElementById('myForm');
+    form.addEventListener('submit', function(event) {
+        event.preventDefault(); // Отменяем отправку формы
+        window.location.href = 'home.html'; // Замените 'home.html' на нужную вам страницу
+    });
+</script>
         <p>или</p>
         <a href="#" class="button">Войти через Facebook</a>
         <a href="#" class="button">Войти через Google</a>
