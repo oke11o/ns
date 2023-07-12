@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вывод фиатных средств | Криптовалютная платформа</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            color: #333;
+            background-color: #f0f0f0;
+        }
+        .header {
+            background-color: #333;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        .main-content {
+            padding: 20px;
+            max-width: 600px;
+            margin: auto;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 10px;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+        }
+        .form-group button {
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+        .footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Вывод фиатных средств</h1>
+    </div>
+    <div class="main-content">
+        <form action="withdraw-confirm.html" method="POST">
+            <div class="form-group">
+                <label for="fiat-type">Выберите фиатную валюту:</label>
+                <select id="fiat-type" name="fiat-type">
+                    <option value="USD">Доллар США (USD)</option>
+                    <option value="EURO">Евро (EURO)</option>
+                    <option value="RSD">Сербский динар (RSD)</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="fiat-amount">Количество:</label>
+                <input type="number" id="fiat-amount" name="fiat-amount" required />
+            </div>
+            <div class="form-group">
+                <button type="submit">Оформить заявку на вывод</button>
+            </div>
+        </form>
+    </div>
+    <div class="footer">
+        <p>&copy; 2023 Криптовалютная платформа. Все права защищены.</p>
+    </div>
+</body>
+</html>

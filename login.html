@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вход | Криптовалютная платформа</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            color: #333;
+            background-color: #f0f0f0;
+        }
+        .header {
+            background-color: #333;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        .main-content {
+            padding: 20px;
+            max-width: 600px;
+            margin: auto;
+        }
+        .footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+        .button {
+            background-color: #4CAF50; /* Green */
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Вход</h1>
+    </div>
+    <div class="main-content">
+        <form action="home.html" method="get">
+            <label for="email">Email:</label><br>
+            <input type="email" id="email" name="email"><br>
+            <label for="password">Пароль:</label><br>
+            <input type="password" id="password" name="password"><br>
+            <input type="submit" value="Войти" class="button">
+        </form>
+        <p>или</p>
+        <a href="#" class="button">Войти через Facebook</a>
+        <a href="#" class="button">Войти через Google</a>
+    </div>
+    <div class="footer">
+        <p>&copy; 2023 Криптовалютная платформа. Все права защищены.</p>
+    </div>
+</body>
+</html>

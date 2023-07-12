@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Обмен криптовалют | Криптовалютная платформа</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f4f4f4;
+        }
+        .container {
+            width: 80%;
+            margin: 0 auto;
+        }
+        .header {
+            background: #333;
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+        }
+        .exchange-form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 50px;
+        }
+        .exchange-rate {
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+        .exchange-rate h2 {
+            text-align: center;
+        }
+        .chart {
+            width: 100%;
+            height: 300px;
+            margin-bottom: 20px;
+            background: url('BTCUSDT-15ddgd-1.png') no-repeat center;
+            background-size: cover;
+        }
+        .btn {
+            margin: 10px;
+            padding: 10px 20px;
+            background: #333;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Криптовалютная платформа</h1>
+    </div>
+    <div class="container">
+        <form id="exchangeForm" class="exchange-form">
+            <label for="pair">Выберите пару для обмена:</label>
+            <select name="pair" id="pair">
+                <option value="BTC/ETH">BTC/ETH</option>
+                <option value="ETH/BTC">ETH/BTC</option>
+                <option value="BTC/USDT">BTC/USDT</option>
+                <option value="USDT/ETH">USDT/ETH</option>
+                <option value="BTC/EURO">BTC/EURO</option>
+                <option value="BTC/USD">BTC/USD</option>
+                <option value="BTC/RSD">BTC/RSD</option>
+                <!-- Добавьте другие пары по необходимости -->
+            </select>
+            <button class="btn" type="button">Обменять по текущему курсу</button>
+            <button class="btn" type="button">Поставить ордер</button>
+        </form>
+        <div class="exchange-rate">
+            <h2 id="exchangeRate">Текущий курс обмена: BTC/ETH</h2>
+            <div class="chart"></div>
+        </div>
+    </div>
+
+    <script>
+        var exchangeForm = document.getElementById('exchangeForm');
+        var exchangeRate = document.getElementById('exchangeRate');
+        exchangeForm.addEventListener('change', function(e) {
+            if (e.target.value) {
+                exchangeRate.innerText = 'Текущий курс обмена: ' + e.target.value;
+            }
+        });
+    </script>
+</body>
+</html>
