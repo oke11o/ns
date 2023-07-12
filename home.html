@@ -20,23 +20,32 @@
             padding: 20px;
             max-width: 600px;
             margin: auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
         }
         .balance {
             background-color: #ddd;
             padding: 20px;
-            margin-bottom: 20px;
+        }
+        .balance h2 {
+            margin-bottom: 10px;
+        }
+        .balance p {
+            margin: 0;
+            margin-bottom: 5px;
         }
         .footer {
-  background-color: #333;
-  color: white;
-  text-align: center;
-  padding: 10px;
-  position: relative;
-  margin-top: auto;
-  width: 100%;
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            position: relative;
+            margin-top: auto;
+            width: 100%;
         }
         .button {
-            background-color: #4CAF50; /* Green */
+            background-color: #4CAF50;
             border: none;
             color: white;
             padding: 15px 32px;
@@ -54,19 +63,25 @@
         <h1>Личный кабинет</h1>
     </div>
     <div class="main-content">
-        <p>Добро пожаловать, <strong>Имя пользователя</strong>!</p>
-        <div class="balance">
-            <h2>Ваш баланс:</h2>
-            <p>Bitcoin: 0 BTC</p>
-            <p>Ethereum: 0 ETH</p>
-            <p>USDT: 0 USDT</p>
-            <p>Доллар США: 0 USD</p>
-            <p>Евро: 0 EURO</p>
-            <p>Сербский динар: 0 RSD</p>
+        <div>
+            <h2>Криптовалюты:</h2>
+            <div class="balance">
+                <p>Bitcoin: 0 BTC</p>
+                <p>Ethereum: 0 ETH</p>
+                <p>USDT: 0 USDT</p>
+            </div>
+            <a href="transfer.html" class="button">Перевести криптовалюту</a>
+            <a href="exchange.html" class="button">Обменять криптовалюту</a>
         </div>
-        <a href="transfer.html" class="button">Перевести криптовалюту</a>
-        <a href="exchange.html" class="button">Обменять криптовалюту</a>
-        <a href="fiat-withdraw.html" class="button">Оформить заявку на вывод</a>
+        <div>
+            <h2>Фиатные валюты:</h2>
+            <div class="balance">
+                <p>Доллар США: 0 USD</p>
+                <p>Евро: 0 EURO</p>
+                <p>Сербский динар: 0 RSD</p>
+            </div>
+            <a href="fiat-withdraw.html" class="button">Оформить заявку на вывод</a>
+        </div>
     </div>
     <div class="footer">
         <p>&copy; 2023 Криптовалютная платформа. Все права защищены.</p>
