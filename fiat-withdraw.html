@@ -45,13 +45,13 @@
             cursor: pointer;
         }
         .footer {
-  background-color: #333;
-  color: white;
-  text-align: center;
-  padding: 10px;
-  position: relative;
-  margin-top: auto;
-  width: 100%;
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            position: relative;
+            margin-top: auto;
+            width: 100%;
         }
     </style>
 </head>
@@ -60,8 +60,8 @@
         <h1>Вывод фиатных средств</h1>
     </div>
     <div class="main-content">
-	        <form id="myForm">
-             <div class="form-group">
+        <form id="myForm">
+            <div class="form-group">
                 <label for="fiat-type">Выберите фиатную валюту:</label>
                 <select id="fiat-type" name="fiat-type">
                     <option value="USD">Доллар США (USD)</option>
@@ -74,18 +74,27 @@
                 <input type="number" id="fiat-amount" name="fiat-amount" required />
             </div>
             <div class="form-group">
+                <label for="kassa">Выберите кассу:</label>
+                <select id="kassa" name="kassa">
+                    <option value="kassa1">Касса №1</option>
+                    <option value="kassa2">Касса №2</option>
+                    <option value="kassa3">Касса №3</option>
+                </select>
+            </div>
+            <div class="form-group">
                 <button type="submit">Оформить заявку на вывод</button>
             </div>
         </form>
-										<script>
-    var form = document.getElementById('myForm');
-    form.addEventListener('submit', function(event) {
-        event.preventDefault(); // Отменяем отправку формы
-        window.location.href = 'withdraw-confirm.html'; // Замените 'home.html' на нужную вам страницу
-    });
     </div>
     <div class="footer">
         <p>&copy; 2023 Криптовалютная платформа. Все права защищены.</p>
     </div>
+    <script>
+        var form = document.getElementById('myForm');
+        form.addEventListener('submit', function(event) {
+            event.preventDefault(); // Отменяем отправку формы
+            window.location.href = 'withdraw-confirm.html'; // Замените 'home.html' на нужную вам страницу
+        });
+    </script>
 </body>
 </html>
