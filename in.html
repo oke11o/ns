@@ -97,11 +97,18 @@
                 </select>
             </div>
             <div class="form-group">
-    <a href="input-confirm.html">
+    
         <button type="submit">Пополнить</button>
-    </a>
+   
             </div>
         </form>
+        				<script>
+    var form = document.getElementById('fiat-replenish-form');
+    form.addEventListener('submit', function(event) {
+        event.preventDefault(); // Отменяем отправку формы
+        window.location.href = 'input-confirm.html'; // Замените 'home.html' на нужную вам страницу
+    });
+</script>
     </div>
     <div class="footer">
         <p>&copy; 2023 Криптовалютная платформа. Все права защ
