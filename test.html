@@ -1,33 +1,59 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mermaid@10.0.2/dist/mermaid.min.css">
-  <script src="https://cdn.jsdelivr.net/npm/mermaid@10.0.2/dist/mermaid.min.js"></script>
+  <title>Схема Функциональности и Работы Мобильного Приложения</title>
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10.4.0/dist/mermaid.min.js"></script>
+  <script>
+    mermaid.initialize({startOnLoad: true});
+  </script>
   <style>
-    .nodeStyle {
-      fill: #F6BD60;
-      stroke: #F1A85C;
-      stroke-width: 2px;
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      background-color: #f5f5f5;
     }
-    .linkStyle {
-      stroke: #D4AC6A;
-      stroke-width: 2px;
+    .mermaid {
+      background-color: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     }
   </style>
 </head>
 <body>
-  <div class="mermaid">
-    graph TD
-      classDef nodeStyle fill:#F6BD60,stroke:#F1A85C,stroke-width:2px;
-      classDef linkStyle stroke:#D4AC6A,stroke-width:2px;
-      A[Начало] -->|Поток данных 1| B[Середина]
-      B -->|Поток данных 2| C[Конец]
-      class A,B,C nodeStyle
-      class A-B,C-B linkStyle
-  </div>
-  <script>
-    mermaid.initialize({ startOnLoad: true });
-    mermaid.init();
-  </script>
+
+<h2>Схема Функциональности и Работы Мобильного Приложения</h2>
+
+<div class="mermaid">
+  graph TD;
+    A[Пользователь] -->|1| B[Партнерские Магазины]
+    A -->|2| C[Партнерские Кассы]
+    A -->|5| D[Мобильное Приложение]
+    D -.->|10| B
+    D -.->|11| C
+    B -->|3| E[Админский аккаунт партнерского банка]
+    C -->|4| F[Админский аккаунт партнерской кассы]
+    E -->|6| G[Партнерский Банк]
+    F -->|7| G
+    G -->|8| B
+    G -->|9| C
+    linkStyle 4 stroke:#90EE90,stroke-width:2px;
+    linkStyle 5 stroke:#90EE90,stroke-width:2px;
+</div>
+
+<div>
+  <h3>Описание потоков:</h3>
+  <ol>
+    <li>1: Оплата товаров в партнерских магазинах через RSDcoin или мгновенный обмен BTC на RSDcoin.</li>
+    <li>2: Пополнение/вывод RSD или EUR через партнерские кассы.</li>
+    <li>3: Ежедневный перевод RSDcoin на админский аккаунт.</li>
+    <li>4: Зачисление RSDcoin или EURcoin с админского аккаунта на аккаунт пользователя в кассе.</li>
+    <li>5: Генерация QR-кода для операций пополнения/вывода.</li>
+    <li>6, 7: Ежедневная сверка и запрос на перевод фиатных средств из партнерского банка в магазины и кассы.</li>
+    <li>8, 9: Фиатные переводы из партнерского банка в магазины и кассы.</li>
+    <li>10, 11: Передача QR-кода в партнерские магазины и кассы.</li>
+  </ol>
+</div>
+
 </body>
 </html>
