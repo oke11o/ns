@@ -1,0 +1,73 @@
+Использование SVG позволяет нам с большей точностью изобразить сложные связи между компонентами. Вот пример HTML-кода с SVG-элементами для вашей схемы:
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Схема проекта</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+        }
+        svg {
+            margin: 20px;
+        }
+        .box {
+            fill: white;
+            stroke: #007BFF;
+            stroke-width: 3;
+        }
+        text {
+            font-size: 14px;
+            text-anchor: middle;
+        }
+    </style>
+</head>
+<body>
+
+<svg height="800" width="1000">
+    <!-- Boxes -->
+    <rect x="100" y="50" rx="15" ry="15" width="200" height="50" class="box"/>
+    <rect x="100" y="200" rx="15" ry="15" width="200" height="50" class="box"/>
+    <rect x="100" y="350" rx="15" ry="15" width="200" height="50" class="box"/>
+    <rect x="100" y="500" rx="15" ry="15" width="200" height="50" class="box"/>
+    <rect x="400" y="500" rx="15" ry="15" width="200" height="50" class="box"/>
+    <rect x="700" y="500" rx="15" ry="15" width="200" height="50" class="box"/>
+    <!-- Text -->
+    <text x="200" y="80">Пользователь</text>
+    <text x="200" y="230">Мобильное приложение</text>
+    <text x="200" y="380">2FA / AUTH</text>
+    <text x="200" y="530">Backend</text>
+    <text x="500" y="530">Хранилище крипты</text>
+    <text x="800" y="530">Банк/Платежная система</text>
+    <!-- Arrows -->
+    <line x1="200" y1="100" x2="200" y2="200" style="stroke:#007BFF;stroke-width:3"/>
+    <line x1="200" y1="200" x2="200" y2="300" style="stroke:#007BFF;stroke-width:3"/>
+    <line x1="200" y1="300" x2="200" y2="400" style="stroke:#007BFF;stroke-width:3"/>
+    <line x1="200" y1="400" x2="200" y2="500" style="stroke:#007BFF;stroke-width:3"/>
+    <line x1="200" y1="500" x2="400" y2="500" style="stroke:#007BFF;stroke-width:3"/>
+    <line x1="200" y1="500" x2="700" y2="500" style="stroke:#007BFF;stroke-width:3"/>
+    <!-- Arrowheads -->
+    <polygon points="200,195 205,205 195,205" style="fill:#007BFF"/>
+    <polygon points="200,295 205,305 195,305" style="fill:#007BFF"/>
+    <polygon points="200,395 205,405 195,405" style="fill:#007BFF"/>
+    <polygon points="200,495 205,505 195,505" style="fill:#007BFF"/>
+    <polygon points="395,500 405,505 405,495" style="fill:#007BFF"/>
+    <polygon points="695,500 705,505 705,495" style="fill:#007BFF"/>
+</svg>
+
+<div>
+    <h3>Описание потоков:</h3>
+    <p><strong>1:</strong> Пользователь ↔️ Мобильное приложение</p>
+    <p><strong>2:</strong> Мобильное приложение ↔️ 2FA / AUTH</p>
+    <p><strong>3:</strong> 2FA / AUTH ↔️ Backend</p>
+    <p><strong>4:</strong> Backend ↔️ Хранилище крипты</p>
+    <p><strong>5:</strong> Backend ↔️ Банк/Платежная система</p>
+</div>
+
+</body>
+</html>
+```
+
+Этот код создает SVG-диаграмму с блоками и стрелками, которые отображают компоненты и их связи. Пожалуйста, скопируйте этот код в HTML-файл и откройте его в вашем веб-браузере.
