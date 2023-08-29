@@ -1,76 +1,76 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Схема проекта</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f9f9f9;
-            margin: 0;
-            padding: 0;
-        }
-        .container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        .horizontal-container {
-            display: flex;
-            justify-content: space-around;
-        }
-        .box {
-            border: 2px solid #555;
-            border-radius: 8px;
-            padding: 20px;
-            margin: 10px;
-            text-align: center;
-            width: 200px;
-            background-color: #fff;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-        .arrow {
-            font-size: 24px;
-            padding: 20px;
-            color: #555;
-        }
-        .flow-description {
-            margin-top: 20px;
-            border-top: 1px solid #ccc;
-            padding: 20px;
-        }
-    </style>
+  <title>Схема проекта</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f0f0;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .horizontal-container {
+      display: flex;
+      justify-content: space-around;
+    }
+    .box {
+      border: 3px solid #007BFF;
+      border-radius: 8px;
+      padding: 20px;
+      margin: 20px;
+      text-align: center;
+      width: 200px;
+      background-color: #fff;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    }
+    .arrow {
+      font-size: 32px;
+      padding: 20px;
+      color: #555;
+    }
+    .flow-description {
+      margin-top: 20px;
+      border-top: 2px solid #007BFF;
+      padding: 20px;
+    }
+  </style>
 </head>
 <body>
 
-    <div class="container">
-        <div class="box">Пользователь</div>
-        <div class="arrow" id="flow1">&#8595;</div>
-        <div class="box">Мобильное приложение</div>
-        <div class="arrow" id="flow2">&#8595;</div>
-        <div class="box">2FA / AUTH</div>
-        <div class="arrow" id="flow3">&#8595;</div>
-        <div class="box">Backend</div>
-        <div class="arrow" id="flow4">&#8595;&#8592;&#8594;</div>
-        <div class="horizontal-container">
-            <div class="box">AML/CFT сервис</div>
-            <div class="box">Хранилище крипты</div>
-            <div class="box">Банк/Платежная система</div>
-        </div>
-        <div class="arrow" id="flow5">&#8595;</div>
-        <div class="horizontal-container">
-            <div class="box">Партнерские кассы</div>
-            <div class="box">Партнерские магазины</div>
-            <div class="box">Криптовалютные биржи/кошельки</div>
-        </div>
+  <div class="container">
+    <div class="box">Пользователь</div>
+    <div class="arrow" id="flow1">&#8595;</div>
+    <div class="box">Мобильное приложение</div>
+    <div class="arrow" id="flow2">&#8595;</div>
+    <div class="box">2FA / AUTH</div>
+    <div class="arrow" id="flow3">&#8595;</div>
+    <div class="box">Backend</div>
+    <div class="arrow" id="flow4">&#8595;&#8594;&#8592;</div>
+    <div class="horizontal-container">
+      <div class="box">AML/CFT сервис</div>
+      <div class="box">Хранилище крипты</div>
+      <div class="box">Банк/Платежная система</div>
     </div>
-    <div class="flow-description">
-        <h3>Описание потоков:</h3>
-        <p><strong>Flow 1:</strong> Пользователь взаимодействует с мобильным приложением.</p>
-        <p><strong>Flow 2:</strong> Мобильное приложение связывается с 2FA/AUTH для аутентификации.</p>
-        <p><strong>Flow 3:</strong> 2FA/AUTH передает данные на Backend.</p>
-        <p><strong>Flow 4:</strong> Backend общается с AML/CFT, хранилищем крипты и банковской системой.</p>
-        <p><strong>Flow 5:</strong> Backend синхронизируется с партнерскими кассами, магазинами и криптобиржами.</p>
+    <div class="arrow" id="flow5">&#8595;</div>
+    <div class="horizontal-container">
+      <div class="box">Партнерские кассы</div>
+      <div class="box">Партнерские магазины</div>
+      <div class="box">Криптовалютные биржи/кошельки</div>
     </div>
+  </div>
+  <div class="flow-description">
+    <h3>Описание потоков:</h3>
+    <p><strong>Flow 1:</strong> Пользователь ↔️ Мобильное приложение.</p>
+    <p><strong>Flow 2:</strong> Мобильное приложение ↔️ 2FA / AUTH.</p>
+    <p><strong>Flow 3:</strong> 2FA / AUTH ↔️ Backend.</p>
+    <p><strong>Flow 4:</strong> Backend ↔️ AML/CFT сервис, Хранилище крипты, Банк/Платежная система.</p>
+    <p><strong>Flow 5:</strong> Backend ↔️ Партнерские кассы, Партнерские магазины, Криптовалютные биржи/кошельки.</p>
+  </div>
 
 </body>
 </html>
