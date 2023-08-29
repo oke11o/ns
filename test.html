@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mermaid@10.0.2/dist/mermaid.min.css">
+  <style>
+    .nodeStyle {
+      fill: #F6BD60;
+      stroke: #F1A85C;
+      stroke-width: 2px;
+    }
+    .linkStyle {
+      stroke: #D4AC6A;
+      stroke-width: 2px;
+    }
+  </style>
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10.0.2/dist/mermaid.esm.min.mjs';
+    mermaid.initialize({ startOnLoad: true });
+  </script>
+</head>
+<body>
+  <div class="mermaid">
+    graph TD
+      classDef nodeStyle fill:#F6BD60,stroke:#F1A85C,stroke-width:2px;
+      classDef linkStyle stroke:#D4AC6A,stroke-width:2px;
+      A[Начало] -->|Поток данных 1| B[Середина]
+      B -->|Поток данных 2| C[Конец]
+      class A,B,C nodeStyle
+      class A-B,C-B linkStyle
+  </div>
+</body>
+</html>
