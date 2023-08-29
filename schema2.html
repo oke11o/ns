@@ -1,64 +1,19 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Диаграмма проекта</title>
-  <style>
-    svg {
-      margin: 20px;
-    }
-    .box {
-      fill: #ffffff;
-      stroke: #000000;
-      stroke-width: 2;
-    }
-    text {
-      font-size: 14px;
-      text-anchor: middle;
-      font-weight: bold;
-    }
-    h3 {
-      font-weight: bold;
-    }
-  </style>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mermaid@10.0.2/dist/mermaid.min.css">
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10.0.2/dist/mermaid.esm.min.mjs';
+    mermaid.initialize({ startOnLoad: true });
+  </script>
 </head>
 <body>
-
-<svg height="800" width="1200">
-  <!-- Прямоугольники для элементов -->
-  <rect x="50"  y="50" rx="10" ry="10" width="200" height="50" class="box"/>
-  <rect x="300" y="50" rx="10" ry="10" width="200" height="50" class="box"/>
-  <rect x="600" y="50" rx="10" ry="10" width="200" height="50" class="box"/>
-  <rect x="300" y="150" rx="10" ry="10" width="200" height="50" class="box"/>
-  <rect x="600" y="150" rx="10" ry="10" width="200" height="50" class="box"/>
-  <rect x="600" y="250" rx="10" ry="10" width="200" height="50" class="box"/>
-
-  <!-- Текст для элементов -->
-  <text x="150" y="80">Пользователь</text>
-  <text x="400" y="80">Мобильное прил.</text>
-  <text x="700" y="80">2FA / Аутент.</text>
-  <text x="400" y="180">Бэкенд</text>
-  <text x="700" y="180">Хранилище крипты</text>
-  <text x="700" y="280">Банк / Кассы</text>
-
-  <!-- Стрелки -->
-  <line x1="250" y1="75" x2="300" y2="75" style="stroke:#000;stroke-width:2;marker-end:url(#arrowhead)"/>
-  <line x1="500" y1="75" x2="600" y2="75" style="stroke:#000;stroke-width:2;marker-end:url(#arrowhead)"/>
-  <line x1="400" y1="100" x2="400" y2="150" style="stroke:#000;stroke-width:2;marker-end:url(#arrowhead)"/>
-  <line x1="700" y1="100" x2="700" y2="150" style="stroke:#000;stroke-width:2;marker-end:url(#arrowhead)"/>
-  <line x1="700" y1="200" x2="700" y2="250" style="stroke:#000;stroke-width:2;marker-end:url(#arrowhead)"/>
-</svg>
-
-<!-- Описание потоков данных и финансовых операций -->
-<div>
-  <h3>Описание потоков:</h3>
-  <ol>
-    <li>Поток 1: Пользователь ↔️ Мобильное приложение: Интерфейс пользователя для системы.</li>
-    <li>Поток 2: Мобильное приложение ↔️ 2FA / Аутентификация: Проверки безопасности и аутентификации пользователя.</li>
-    <li>Поток 3: 2FA / Аутентификация ↔️ Бэкенд: Управление данными и потоками для аутентификации.</li>
-    <li>Поток 4: Бэкенд ↔️ Хранилище криптовалют: Хранение и управление криптовалютами.</li>
-    <li>Поток 5: Бэкенд ↔️ Банк / Физические кассы: Управление фиатными валютами и наличными средствами.</li>
-  </ol>
-</div>
-
+  <div class="mermaid">
+    graph TD
+      A[Блок 1] --> B[Блок 2]
+      A --> C[Блок 3]
+      B --> D[Блок 4]
+      C --> D
+  </div>
 </body>
 </html>
