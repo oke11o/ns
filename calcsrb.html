@@ -92,7 +92,64 @@
     </div>
 
     <script>
-        // Ваш JavaScript код остаје неизменним
+        function replaceCommasWithDots(inputValue) {
+            return inputValue.replace(',', '.');
+        }
+
+        function loadData(url, callback) {
+            fetch(url)
+                .then(response => response.json())
+                .then(data => callback(data))
+                .catch(error => console.error('Error:', error));
+        }
+
+        function loadBtcRate() {
+            loadData("https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd", data => {
+                var btcRateInput = document.getElementById("btcRateInput");
+                var btcRate = data.bitcoin.usd;
+                btcRateInput.value = btcRate;
+            });
+        }
+
+        function loadNetworkDifficulty() {
+            loadData("https://blockchain.info/q/getdifficulty?format.json", data => {
+                var networkDifficultyInput = document.getElementById("networkDifficulty");
+                var currentDifficulty = data;
+                networkDifficultyInput.value = currentDifficulty;
+            });
+        }
+
+        function loadBlockReward() {
+            loadData("https://blockchain.info/q/bcperblock?format.json", data => {
+                var blockRewardInput = document.getElementById("blockReward");
+                var currentBlockReward = data;
+                blockRewardInput.value = currentBlockReward;
+            });
+        }
+
+        loadBtcRate();
+        loadNetworkDifficulty();
+        loadBlockReward();
+
+        function calculateProfitability() {
+            var hashRate = parseFloat(replaceCommasWithDots(document.getElementById("hashRate").value)) * 1000000000000;
+            var networkDifficulty = parseFloat(replaceCommasWithDots(document.getElementById("networkDifficulty").value));
+            var blockReward = parseFloat(replaceCommasWithDots(document.getElementById("blockReward").value));
+            var periodInSeconds = 86400;
+
+            var incomeInCoins = (periodInSeconds * blockReward * hashRate) / (networkDifficulty * Math.pow(2, 32));
+
+            var btcToUsdRate = parseFloat(replaceCommasWithDots(document.getElementById("btcRateInput").value));
+            var dailyIncome = incomeInCoins * btcToUsdRate;
+
+            var powerConsumption = parseFloat(replaceCommasWithDots(document.getElementById("powerConsumption").value)) / 1000;
+            var electricityCost = parseFloat(replaceCommasWithDots(document.getElementById("electricityCost").value));
+            var dailyCost = (powerConsumption) * electricityCost * 24 ;
+            var dailyProfitability = dailyIncome - dailyCost;
+
+            document.getElementById("incomeResult").textContent = dailyIncome.toFixed(2);
+            document.getElementById("profitabilityResult").textContent = dailyProfitability.toFixed(2);
+        }
     </script>
 </body>
 </html>
