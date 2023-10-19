@@ -28,9 +28,10 @@
             margin-top: 10px;
         }
         input, select {
+            background-color: #4fffff;
             padding: 10px;
             width: 100%;
-            border: 2px solid #ff8500;
+            border: 1px solid #ff8500;
             border-radius: 5px;
             font-size: 1.2em;
             margin-top: 5px;
@@ -38,9 +39,9 @@
         button {
             background-color: #ff8500;
             color: #fff;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
+            padding: 7px 20px;
+            border: 1px solid #168520;
+            border-radius: 10px;
             cursor: pointer;
             font-size: 1.2em;
             margin-top: 10px;
@@ -71,15 +72,17 @@
         <h1>Калькулятор майнинга sha256</h1>
         <form id="miningCalculator">
             <label for="hashRate">Производительность асика (TH/s):</label>
-            <input type="text" id="hashRate" name="hashRate" placeholder="Укажите производительность в терахешах" value="120">
-            <label for="powerConsumption">Энергопотребление асика в кВтч:</label>
-            <input type="text" id="powerConsumption" name="powerConsumption" placeholder="Укажите энергопотребление в кВтч" value="2.8">
+            <input type="text" id="hashRate" name="hashRate" placeholder="Укажите производительность в терахешах" value="118">
+            <label for="totalPowerConsumption">нужно ввести или общее энергопотребление асика (Вт):</label>
+            <input type="text" id="totalPowerConsumption" name="totalPowerConsumption" placeholder="Укажите общее энергопотребление в Вт" value="3422">
+            <label for="powerConsumptionPerTerahash">или энергопотребление на 1 терахеш (Вт):</label>
+            <input type="text" id="powerConsumptionPerTerahash" name="powerConsumptionPerTerahash" placeholder="Укажите энергопотребление на 1 терахеш в Вт" value="29">
             <label for="networkDifficulty">Сложность сети:</label>
             <input type="text" id="networkDifficulty" name="networkDifficulty" placeholder="Укажите сложность сети" value="Загрузка...">
             <label for="blockReward">Награда за блок (BTC):</label>
             <input type="text" id="blockReward" name="blockReward" placeholder="Укажите награду за блок в BTC" value="Загрузка...">
             <label for="electricityCost">Стоимость электроэнергии (USD/кВтч):</label>
-            <input type="text" id="electricityCost" name="electricityCost" placeholder="Укажите стоимость электроэнергии в киловатт-часах" value="0.04">
+            <input type="text" id="electricityCost" name="electricityCost" placeholder="Укажите стоимость электроэнергии в киловатт-часах" value="0.05">
             <label for="btcToUsdRate">Курс биткоина к доллару (USD/BTC):</label>
             <input type="text" id="btcRateInput" name="btcRateInput" placeholder="Укажите курс биткоина в USD" value="Загрузка...">
             <button type="button" onclick="calculateProfitability()">Рассчитать</button>
@@ -130,6 +133,32 @@
         loadNetworkDifficulty();
         loadBlockReward();
 
+        document.getElementById("totalPowerConsumption").addEventListener("input", function() {
+            calculatePowerConsumptionPerTerahash();
+        });
+
+        document.getElementById("powerConsumptionPerTerahash").addEventListener("input", function() {
+            calculateTotalPowerConsumption();
+        });
+
+        function calculatePowerConsumptionPerTerahash() {
+            var totalPowerConsumption = parseFloat(replaceCommasWithDots(document.getElementById("totalPowerConsumption").value));
+            var hashRate = parseFloat(replaceCommasWithDots(document.getElementById("hashRate").value)) * 1000000000000;
+            if (totalPowerConsumption && hashRate) {
+                var powerConsumptionPerTerahash = totalPowerConsumption / (hashRate / 1000000000000);
+                document.getElementById("powerConsumptionPerTerahash").value = powerConsumptionPerTerahash;
+            }
+        }
+
+        function calculateTotalPowerConsumption() {
+            var powerConsumptionPerTerahash = parseFloat(replaceCommasWithDots(document.getElementById("powerConsumptionPerTerahash").value));
+            var hashRate = parseFloat(replaceCommasWithDots(document.getElementById("hashRate").value)) * 1000000000000;
+            if (powerConsumptionPerTerahash && hashRate) {
+                var totalPowerConsumption = powerConsumptionPerTerahash * (hashRate / 1000000000000);
+                document.getElementById("totalPowerConsumption").value = totalPowerConsumption;
+            }
+        }
+
         function calculateProfitability() {
             var hashRate = parseFloat(replaceCommasWithDots(document.getElementById("hashRate").value)) * 1000000000000;
             var networkDifficulty = parseFloat(replaceCommasWithDots(document.getElementById("networkDifficulty").value));
@@ -141,13 +170,25 @@
             var btcToUsdRate = parseFloat(replaceCommasWithDots(document.getElementById("btcRateInput").value));
             var dailyIncome = incomeInCoins * btcToUsdRate;
 
-            var powerConsumption = parseFloat(replaceCommasWithDots(document.getElementById("powerConsumption").value));
+            var totalPowerConsumption = parseFloat(replaceCommasWithDots(document.getElementById("totalPowerConsumption").value));
+            var powerConsumptionPerTerahash = parseFloat(replaceCommasWithDots(document.getElementById("powerConsumptionPerTerahash").value));
+
+            if (totalPowerConsumption && !powerConsumptionPerTerahash) {
+                // Calculate power consumption per terahash
+                powerConsumptionPerTerahash = totalPowerConsumption / (hashRate / 1000000000000);
+                document.getElementById("powerConsumptionPerTerahash").value = powerConsumptionPerTerahash;
+            } else if (!totalPowerConsumption && powerConsumptionPerTerahash) {
+                // Calculate total power consumption
+                totalPowerConsumption = powerConsumptionPerTerahash * (hashRate / 1000000000000);
+                document.getElementById("totalPowerConsumption").value = totalPowerConsumption;
+            }
+
             var electricityCost = parseFloat(replaceCommasWithDots(document.getElementById("electricityCost").value));
-            var dailyCost = (powerConsumption) * electricityCost * 24;
+            var dailyCost = (totalPowerConsumption / 1000) * electricityCost * 24;
             var dailyProfitability = dailyIncome - dailyCost;
 
-            document.getElementById("incomeResult").textContent = dailyIncome.toFixed(2) + " USD/сутки";
-            document.getElementById("profitabilityResult").textContent = dailyProfitability.toFixed(2) + " USD/сутки";
+            document.getElementById("incomeResult").textContent = dailyIncome.toFixed(2);
+            document.getElementById("profitabilityResult").textContent = dailyProfitability.toFixed(2);
         }
     </script>
 </body>
