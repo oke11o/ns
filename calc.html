@@ -15,13 +15,12 @@
             max-width: 600px;
             margin: 0 auto;
             padding: 20px;
-            background-color: #ffffff;
-            border-radius: 10px;
+            background-color: #fff;
+            border-radius: 5px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
         h1 {
             color: #ff8500;
-            font-size: 2em; /* Увеличение размера шрифта заголовка */
         }
         label {
             font-size: 1.2em;
@@ -39,7 +38,7 @@
         button {
             background-color: #ff8500;
             color: #fff;
-            padding: 15px 30px; /* Увеличение размера кнопки */
+            padding: 10px 20px;
             border: none;
             border-radius: 5px;
             cursor: pointer;
@@ -58,7 +57,7 @@
             align-items: center;
         }
         .signature {
-            font-size: 1em; /* Уменьшение размера подписи */
+            font-size: 0.8em;
             color: #777;
             margin-top: 20px;
         }
@@ -67,4 +66,89 @@
         }
     </style>
 </head>
-<!-- Остальной код остается без изменений -->
+<body>
+    <div class="container">
+        <h1>Калькулятор майнинга sha256</h1>
+        <form id="miningCalculator">
+            <label for="hashRate">Производительность асика (TH/s):</label>
+            <input type="text" id="hashRate" name="hashRate" placeholder="Укажите производительность в терахешах" value="120">
+            <label for="powerConsumption">Энергопотребление асика в кВтч:</label>
+            <input type="text" id="powerConsumption" name="powerConsumption" placeholder="Укажите энергопотребление в кВтч" value="2.8">
+            <label for="networkDifficulty">Сложность сети:</label>
+            <input type="text" id="networkDifficulty" name="networkDifficulty" placeholder="Укажите сложность сети" value="Загрузка...">
+            <label for="blockReward">Награда за блок (BTC):</label>
+            <input type="text" id="blockReward" name="blockReward" placeholder="Укажите награду за блок в BTC" value="Загрузка...">
+            <label for="electricityCost">Стоимость электроэнергии (USD/кВтч):</label>
+            <input type="text" id="electricityCost" name="electricityCost" placeholder="Укажите стоимость электроэнергии в киловатт-часах" value="0.04">
+            <label for="btcToUsdRate">Курс биткоина к доллару (USD/BTC):</label>
+            <input type="text" id="btcRateInput" name="btcRateInput" placeholder="Укажите курс биткоина в USD" value="Загрузка...">
+            <button type="button" onclick="calculateProfitability()">Рассчитать</button>
+        </form>
+        <h2>Результаты расчета:</h2>
+        <p>Доходность: <span id="incomeResult">0</span> USD/сутки</p>
+        <p>Прибыльность: <span id="profitabilityResult">0</span> USD/сутки</p>
+        <p class="signature">Создано с ❤️ &nbsp; <a href="https://t.me/+HfubDYF6dHM0ZDYy" class="telegram-link">связаться в Telegram</a></p>
+    </div>
+
+    <script>
+        function replaceCommasWithDots(inputValue) {
+            return inputValue.replace(',', '.');
+        }
+
+        function loadData(url, callback) {
+            fetch(url)
+                .then(response => response.json())
+                .then(data => callback(data))
+                .catch(error => console.error('Error:', error));
+        }
+
+        function loadBtcRate() {
+            loadData("https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd", data => {
+                var btcRateInput = document.getElementById("btcRateInput");
+                var btcRate = data.bitcoin.usd;
+                btcRateInput.value = btcRate;
+            });
+        }
+
+        function loadNetworkDifficulty() {
+            loadData("https://blockchain.info/q/getdifficulty?format.json", data => {
+                var networkDifficultyInput = document.getElementById("networkDifficulty");
+                var currentDifficulty = data;
+                networkDifficultyInput.value = currentDifficulty;
+            });
+        }
+
+        function loadBlockReward() {
+            loadData("https://blockchain.info/q/bcperblock?format.json", data => {
+                var blockRewardInput = document.getElementById("blockReward");
+                var currentBlockReward = data;
+                blockRewardInput.value = currentBlockReward;
+            });
+        }
+
+        loadBtcRate();
+        loadNetworkDifficulty();
+        loadBlockReward();
+
+        function calculateProfitability() {
+            var hashRate = parseFloat(replaceCommasWithDots(document.getElementById("hashRate").value)) * 1000000000000;
+            var networkDifficulty = parseFloat(replaceCommasWithDots(document.getElementById("networkDifficulty").value));
+            var blockReward = parseFloat(replaceCommasWithDots(document.getElementById("blockReward").value));
+            var periodInSeconds = 86400;
+
+            var incomeInCoins = (periodInSeconds * blockReward * hashRate) / (networkDifficulty * Math.pow(2, 32));
+
+            var btcToUsdRate = parseFloat(replaceCommasWithDots(document.getElementById("btcRateInput").value));
+            var dailyIncome = incomeInCoins * btcToUsdRate;
+
+            var powerConsumption = parseFloat(replaceCommasWithDots(document.getElementById("powerConsumption").value));
+            var electricityCost = parseFloat(replaceCommasWithDots(document.getElementById("electricityCost").value));
+            var dailyCost = (powerConsumption) * electricityCost * 24;
+            var dailyProfitability = dailyIncome - dailyCost;
+
+            document.getElementById("incomeResult").textContent = dailyIncome.toFixed(2) + " USD/сутки";
+            document.getElementById("profitabilityResult").textContent = dailyProfitability.toFixed(2) + " USD/сутки";
+        }
+    </script>
+</body>
+</html>
