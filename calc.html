@@ -51,11 +51,24 @@
         #btcRateSpan {
             color: #1a1a1a;
         }
+        .input-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .signature {
+            font-size: 0.8em;
+            color: #777;
+            margin-top: 20px;
+        }
+        .telegram-link {
+            color: #357abd;
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Калькулятор майнинга</h1>
+        <h1>Калькулятор майнинга sha256</h1>
         <form id="miningCalculator">
             <label for="hashRate">Производительность асика (TH/s):</label>
             <input type="text" id="hashRate" name="hashRate" placeholder="Укажите производительность в терахешах" value="120">
@@ -74,6 +87,7 @@
         <h2>Результаты расчета:</h2>
         <p>Доходность: <span id="incomeResult">0</span> USD/сутки</p>
         <p>Прибыльность: <span id="profitabilityResult">0</span> USD/сутки</p>
+        <p class="signature">Создано с ❤️ &nbsp; <a href="https://t.me/+HfubDYF6dHM0ZDYy" class="telegram-link">связаться в Telegram</a></p>
     </div>
 
     <script>
@@ -97,7 +111,7 @@
         }
 
         function loadNetworkDifficulty() {
-            loadData("https://blockchain.info/q/getdifficulty?format=json", data => {
+            loadData("https://blockchain.info/q/getdifficulty?format.json", data => {
                 var networkDifficultyInput = document.getElementById("networkDifficulty");
                 var currentDifficulty = data;
                 networkDifficultyInput.value = currentDifficulty;
@@ -105,7 +119,7 @@
         }
 
         function loadBlockReward() {
-            loadData("https://blockchain.info/q/bcperblock?format=json", data => {
+            loadData("https://blockchain.info/q/bcperblock?format.json", data => {
                 var blockRewardInput = document.getElementById("blockReward");
                 var currentBlockReward = data;
                 blockRewardInput.value = currentBlockReward;
