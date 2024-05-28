@@ -45,7 +45,7 @@ function showBuildingOptions(latlng, buildingId) {
             <p>Текущий тип: ${building.type}</p>
             <p>Уровень: ${building.level}</p>
             <button onclick="rebuildBuilding('${buildingId}', '${latlng.lat}', '${latlng.lng}', 'жилое')">Перестроить в жилое</button>
-            <button onclick="showCommercialOptions('${buildingId}', '${latlng.lat}', '${latlng.lng}')">Перестроить в коммерческое</button>
+            <button onclick="showCommercialOptions('${buildingId}', '${latlng.lat}', '${latlng.lng}')">Перестроить  в коммерческое</button>
         </div>
     `;
     L.popup().setLatLng(latlng).setContent(content).openOn(map);
