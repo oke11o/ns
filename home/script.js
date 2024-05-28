@@ -1,17 +1,22 @@
 // Firebase configuration
 var firebaseConfig = {
-	apiKey: "AIzaSyAk68Jk6DvWUZAlGfu-tOKmC45fo1sX18w",
+    apiKey: "AIzaSyAk68Jk6DvWUZAlGfu-tOKmC45fo1sX18w",
     authDomain: "voroshilovdo-39efc.firebaseapp.com",
     projectId: "voroshilovdo-39efc",
     storageBucket: "voroshilovdo-39efc.appspot.com",
     messagingSenderId: "859981515674",
     appId: "1:859981515674:web:c4a6120186614d24a78823"
-
 };
 
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 var db = firebase.firestore();
+
+function logMessage(message) {
+    var logDiv = document.getElementById('log');
+    logDiv.innerHTML += `<p>${message}</p>`;
+    console.log(message);
+}
 
 // Инициализация карты
 var map = L.map('map').setView([51.505, -0.09], 13);
@@ -31,7 +36,7 @@ var buildings = {};
 var markers = {};
 var circles = {};
 
-// Load buildings from Firestore
+// Загрузка зданий из Firestore
 function loadBuildings() {
     db.collection("buildings").get().then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
@@ -60,6 +65,7 @@ function getBuildingInfo(latlng) {
                 var levels = building.tags["building:levels"] || "Неизвестно";
                 if (!buildings[buildingId]) {
                     buildings[buildingId] = { levels: levels, type: "неизвестно", level: 1, latlng: latlng };
+                    saveBuilding(buildingId, buildings[buildingId]);
                 }
                 showBuildingOptions(latlng, buildingId);
                 addBuildingIcon(buildingId);

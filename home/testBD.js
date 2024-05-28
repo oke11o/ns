@@ -15,24 +15,35 @@ var db = firebase.firestore();
 function logMessage(message) {
     var logDiv = document.getElementById('log');
     logDiv.innerHTML += `<p>${message}</p>`;
+    console.log(message);
 }
 
-// Test Firestore connection
-db.collection("test").add({
-    testField: "testValue"
-})
-.then((docRef) => {
-    logMessage("Document written with ID: " + docRef.id);
-})
-.catch((error) => {
-    logMessage("Error adding document: " + error);
-});
+logMessage("Firebase initialized.");
 
-// Read from Firestore
-db.collection("test").get().then((querySnapshot) => {
-    querySnapshot.forEach((doc) => {
-        logMessage(`Document data: ${JSON.stringify(doc.data())}`);
+try {
+    // Test Firestore connection
+    db.collection("test").add({
+        testField: "testValue"
+    })
+    .then((docRef) => {
+        logMessage("Document written with ID: " + docRef.id);
+    })
+    .catch((error) => {
+        logMessage("Error adding document: " + error);
     });
-}).catch((error) => {
-    logMessage("Error getting documents: " + error);
-});
+
+    // Read from Firestore
+    db.collection("test").get().then((querySnapshot) => {
+        if (querySnapshot.empty) {
+            logMessage("No documents found.");
+        } else {
+            querySnapshot.forEach((doc) => {
+                logMessage(`Document data: ${JSON.stringify(doc.data())}`);
+            });
+        }
+    }).catch((error) => {
+        logMessage("Error getting documents: " + error);
+    });
+} catch (error) {
+    logMessage("Error in Firestore operations: " + error);
+}
