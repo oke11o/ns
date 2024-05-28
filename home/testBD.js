@@ -20,30 +20,17 @@ function logMessage(message) {
 
 logMessage("Firebase initialized.");
 
-try {
-    // Test Firestore connection
-    db.collection("test").add({
-        testField: "testValue"
-    })
-    .then((docRef) => {
-        logMessage("Document written with ID: " + docRef.id);
-    })
-    .catch((error) => {
-        logMessage("Error adding document: " + error);
-    });
-
-    // Read from Firestore
-    db.collection("test").get().then((querySnapshot) => {
-        if (querySnapshot.empty) {
-            logMessage("No documents found.");
-        } else {
-            querySnapshot.forEach((doc) => {
-                logMessage(`Document data: ${JSON.stringify(doc.data())}`);
-            });
+// Прослушивание изменений в коллекции "buildings"
+db.collection("buildings").onSnapshot((snapshot) => {
+    snapshot.docChanges().forEach((change) => {
+        if (change.type === "added") {
+            logMessage(`New building: ${JSON.stringify(change.doc.data())}`);
         }
-    }).catch((error) => {
-        logMessage("Error getting documents: " + error);
+        if (change.type === "modified") {
+            logMessage(`Modified building: ${JSON.stringify(change.doc.data())}`);
+        }
+        if (change.type === "removed") {
+            logMessage(`Removed building: ${change.doc.id}`);
+        }
     });
-} catch (error) {
-    logMessage("Error in Firestore operations: " + error);
-}
+});

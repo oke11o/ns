@@ -42,6 +42,7 @@ function loadBuildings() {
         querySnapshot.forEach((doc) => {
             var building = doc.data();
             var buildingId = doc.id;
+            building.latlng = L.latLng(building.latlng.lat, building.latlng.lng); // Преобразование обратно в объект L.latLng
             buildings[buildingId] = building;
             addBuildingIcon(buildingId);
         });
@@ -51,6 +52,8 @@ function loadBuildings() {
 loadBuildings();
 
 function saveBuilding(buildingId, buildingData) {
+    // Преобразование L.latLng в простой объект
+    buildingData.latlng = { lat: buildingData.latlng.lat, lng: buildingData.latlng.lng };
     db.collection("buildings").doc(buildingId).set(buildingData);
 }
 
