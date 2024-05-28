@@ -17,12 +17,14 @@
             padding: 10px;
             border-radius: 5px;
             box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            display: none;
         }
     </style>
 </head>
 <body>
     <div id="map"></div>
-    <div id="info" style="display: none;"></div>
+    <div id="info"></div>
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
     <script src="script.js"></script>
