@@ -1,3 +1,18 @@
+// Firebase configuration
+var firebaseConfig = {
+	apiKey: "AIzaSyAk68Jk6DvWUZAlGfu-tOKmC45fo1sX18w",
+    authDomain: "voroshilovdo-39efc.firebaseapp.com",
+    projectId: "voroshilovdo-39efc",
+    storageBucket: "voroshilovdo-39efc.appspot.com",
+    messagingSenderId: "859981515674",
+    appId: "1:859981515674:web:c4a6120186614d24a78823"
+
+};
+
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+var db = firebase.firestore();
+
 // Инициализация карты
 var map = L.map('map').setView([51.505, -0.09], 13);
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 19 }).addTo(map);
@@ -15,6 +30,24 @@ map.on('click', function(e) {
 var buildings = {};
 var markers = {};
 var circles = {};
+
+// Load buildings from Firestore
+function loadBuildings() {
+    db.collection("buildings").get().then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+            var building = doc.data();
+            var buildingId = doc.id;
+            buildings[buildingId] = building;
+            addBuildingIcon(buildingId);
+        });
+    });
+}
+
+loadBuildings();
+
+function saveBuilding(buildingId, buildingData) {
+    db.collection("buildings").doc(buildingId).set(buildingData);
+}
 
 function getBuildingInfo(latlng) {
     var url = `https://overpass-api.de/api/interpreter?data=[out:json];way(around:50,${latlng.lat},${latlng.lng})["building"];out body;>;out skel qt;`;
@@ -45,7 +78,7 @@ function showBuildingOptions(latlng, buildingId) {
             <p>Текущий тип: ${building.type}</p>
             <p>Уровень: ${building.level}</p>
             <button onclick="rebuildBuilding('${buildingId}', '${latlng.lat}', '${latlng.lng}', 'жилое')">Перестроить в жилое</button>
-            <button onclick="showCommercialOptions('${buildingId}', '${latlng.lat}', '${latlng.lng}')">Перестроить  в коммерческое</button>
+            <button onclick="showCommercialOptions('${buildingId}', '${latlng.lat}', '${latlng.lng}')">Перестроить в коммерческое</button>
         </div>
     `;
     L.popup().setLatLng(latlng).setContent(content).openOn(map);
@@ -66,6 +99,7 @@ function rebuildBuilding(buildingId, lat, lng, type) {
     buildings[buildingId].type = type;
     buildings[buildingId].level = 1;
     addBuildingIcon(buildingId);
+    saveBuilding(buildingId, buildings[buildingId]);
     alert(`Здание по координатам (${lat}, ${lng}) будет перестроено в ${type} здание первого уровня.`);
     getBuildingInfo({ lat: parseFloat(lat), lng: parseFloat(lng) });
 }
