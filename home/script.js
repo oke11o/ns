@@ -19,6 +19,7 @@ map.on('locationfound', function(e) {
 // Обработка клика по карте
 map.on('click', function(e) {
     var latlng = e.latlng;
+    hideInfo();
     getBuildingInfo(latlng);
 });
 
@@ -124,6 +125,7 @@ function addBuildingIcon(buildingId) {
         markers[buildingId] = L.marker(building.latlng, { icon: icon }).addTo(map)
             .on('click', function() {
                 showBuildingRadius(buildingId);
+                showInfo(buildingId);
             });
     }
 }
@@ -157,5 +159,41 @@ function showBuildingRadius(buildingId) {
             fillOpacity: 0.2,
             radius: radius
         }).addTo(map);
+    }
+}
+
+// Функция для отображения информации об объекте
+function showInfo(buildingId) {
+    var building = buildings[buildingId];
+    var latlng = building.latlng;
+
+    var url = `https://overpass-api.de/api/interpreter?data=[out:json];way(around:100,${latlng.lat},${latlng.lng})["building"];out body;>;out skel qt;`;
+
+    axios.get(url)
+        .then(function (response) {
+            var data = response.data;
+            var numberOfHouses = data.elements.length;
+            var infoContent = `
+                <h4>Информация об объекте</h4>
+                <p>Этажность: ${building.levels}</p>
+                <p>Тип: ${building.type}</p>
+                <p>Уровень: ${building.level}</p>
+                <p>Количество домов в радиусе: ${numberOfHouses}</p>
+            `;
+            var infoDiv = document.getElementById('info');
+            infoDiv.innerHTML = infoContent;
+            infoDiv.style.display = 'block';
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+}
+
+// Функция для скрытия информации об объекте
+function hideInfo() {
+    var infoDiv = document.getElementById('info');
+    infoDiv.style.display = 'none';
+    for (var circleId in circles) {
+        map.removeLayer(circles[circleId]);
     }
 }
