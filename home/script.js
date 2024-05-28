@@ -52,9 +52,13 @@ function loadBuildings() {
 loadBuildings();
 
 function saveBuilding(buildingId, buildingData) {
-    // Преобразование L.latLng в простой объект
-    buildingData.latlng = { lat: buildingData.latlng.lat, lng: buildingData.latlng.lng };
-    db.collection("buildings").doc(buildingId).set(buildingData);
+    try {
+        // Преобразование L.latLng в простой объект
+        buildingData.latlng = { lat: buildingData.latlng.lat, lng: buildingData.latlng.lng };
+        db.collection("buildings").doc(buildingId).set(buildingData);
+    } catch (error) {
+        logMessage(`Error saving building: ${error}`);
+    }
 }
 
 function getBuildingInfo(latlng) {
@@ -76,7 +80,9 @@ function getBuildingInfo(latlng) {
                 L.popup().setLatLng(latlng).setContent("Нет информации о здании").openOn(map);
             }
         })
-        .catch(console.log);
+        .catch(function (error) {
+            logMessage(`Error getting building info: ${error}`);
+        });
 }
 
 function showBuildingOptions(latlng, buildingId) {
@@ -182,7 +188,9 @@ function showInfo(buildingId) {
             infoDiv.innerHTML = infoContent;
             infoDiv.style.display = 'block';
         })
-        .catch(console.log);
+        .catch(function (error) {
+            logMessage(`Error showing info: ${error}`);
+        });
 }
 
 function hideInfo() {
