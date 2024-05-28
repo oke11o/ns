@@ -25,6 +25,7 @@ map.on('click', function(e) {
 // Объект для хранения данных о зданиях
 var buildings = {};
 var markers = {};
+var circles = {};
 
 // Функция для получения информации о здании
 function getBuildingInfo(latlng) {
@@ -120,7 +121,10 @@ function addBuildingIcon(buildingId) {
             map.removeLayer(markers[buildingId]);
         }
 
-        markers[buildingId] = L.marker(building.latlng, { icon: icon }).addTo(map);
+        markers[buildingId] = L.marker(building.latlng, { icon: icon }).addTo(map)
+            .on('click', function() {
+                showBuildingRadius(buildingId);
+            });
     }
 }
 
@@ -137,3 +141,21 @@ map.on('zoomend', function() {
         addBuildingIcon(buildingId);
     }
 });
+
+// Функция для отображения радиуса действия
+function showBuildingRadius(buildingId) {
+    var building = buildings[buildingId];
+    
+    if (building.type === 'коммерческое') {
+        var radius = building.level === 1 ? 100 : 200; // пример для уровней
+        if (circles[buildingId]) {
+            map.removeLayer(circles[buildingId]);
+        }
+        circles[buildingId] = L.circle(building.latlng, {
+            color: 'blue',
+            fillColor: '#30f',
+            fillOpacity: 0.2,
+            radius: radius
+        }).addTo(map);
+    }
+}
