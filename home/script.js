@@ -146,8 +146,8 @@ map.on('zoomend', function() {
 function showBuildingRadius(buildingId) {
     var building = buildings[buildingId];
     
-    if (building.type === 'коммерческое') {
-        var radius = building.level === 1 ? 100 : 200; // пример для уровней
+    if (building.type !== 'неизвестно') {
+        var radius = building.type === 'жилое' ? 0 : 100; // 100 метров для коммерческого здания первого уровня
         if (circles[buildingId]) {
             map.removeLayer(circles[buildingId]);
         }
