@@ -1,0 +1,203 @@
+
+GET
+https://georulers.com/v4_2m/
+[HTTP/2 200  37ms]
+
+Fetched buildings: 
+Array(37) [ {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, … ]
+building-management.js:235:17
+Свойство MouseEvent.mozPressure является устаревшим. Для его замены используйте PointerEvent.pressure. leaflet.js:5:320
+MouseEvent.mozInputSource устарел. Вместо этого используйте PointerEvent.pointerType. leaflet.js:5:320
+XHRGET
+https://overpass-api.de/api/interpreter?data=[out:json];way(around:50,45.250785661377044,19.825649857521057)["building"];out body;
+[HTTP/1.1 200 OK 358ms]
+
+XHRGET
+https://georulers.com/php/fetch.php
+[HTTP/2 200  36ms]
+
+Fetched buildings: 
+Array(37) [ {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, … ]
+building-management.js:235:17
+Ошибка карты кода: Error: NetworkError when attempting to fetch resource.
+URL ресурса: https://unpkg.com/leaflet/dist/leaflet.js
+URL карты кода: leaflet.js.map
+
+Nearest building data: 
+Object { type: "way", id: 43645328, nodes: (5) […], tags: {…} }
+building-management.js:62:25
+XHRGET
+https://overpass-api.de/api/interpreter?data=[out:json];node(551962854);out body;
+[HTTP/1.1 200 OK 116ms]
+
+XHRGET
+https://overpass-api.de/api/interpreter?data=[out:json];node(551963364);out body;
+[HTTP/1.1 200 OK 239ms]
+
+XHRGET
+https://overpass-api.de/api/interpreter?data=[out:json];node(551963291);out body;
+[HTTP/1.1 200 OK 300ms]
+
+XHRGET
+https://overpass-api.de/api/interpreter?data=[out:json];node(551962749);out body;
+[HTTP/1.1 200 OK 310ms]
+
+XHRGET
+https://overpass-api.de/api/interpreter?data=[out:json];node(551962854);out body;
+[HTTP/1.1 200 OK 298ms]
+
+XHRPOST
+https://georulers.com/php/submit.php
+[HTTP/2 200  38ms]
+
+Save Building Response: {"success":true} building-management.js:118:17
+Building saved: 
+Object { success: true }
+building-management.js:122:25
+XHRGET
+https://georulers.com/php/fetch.php
+[HTTP/2 200  41ms]
+
+Fetched buildings: 
+Array(38) [ {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, … ]
+building-management.js:235:17
+XHRGET
+https://overpass-api.de/api/interpreter?data=[out:json];way(around:50,45.25052885355774,19.82489883899689)["building"];out body;
+[HTTP/1.1 200 OK 304ms]
+
+Nearest building data: 
+Object { type: "way", id: 43645328, nodes: (5) […], tags: {…} }
+building-management.js:62:25
+XHRGET
+https://overpass-api.de/api/interpreter?data=[out:json];node(551962854);out body;
+[HTTP/1.1 200 OK 194ms]
+
+XHRGET
+https://overpass-api.de/api/interpreter?data=[out:json];node(551963364);out body;
+[HTTP/1.1 200 OK 318ms]
+
+XHRGET
+https://overpass-api.de/api/interpreter?data=[out:json];node(551963291);out body;
+[HTTP/1.1 200 OK 7301ms]
+
+XHRGET
+https://overpass-api.de/api/interpreter?data=[out:json];node(551962749);out body;
+[HTTP/1.1 200 OK 7292ms]
+
+XHRGET
+https://overpass-api.de/api/interpreter?data=[out:json];node(551962854);out body;
+[HTTP/1.1 200 OK 7259ms]
+
+XHRGET
+https://georulers.com/php/fetch.php
+[HTTP/2 200  34ms]
+
+Fetched buildings: 
+Array(38) [ {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, … ]
+building-management.js:235:17
+XHRGET
+https://georulers.com/php/fetch.php
+[HTTP/2 200  33ms]
+
+Fetched buildings: 
+Array(38) [ {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, … ]
+building-management.js:235:17
+XHRGET
+https://overpass-api.de/api/interpreter?data=[out:json];way(around:50,45.25004167082732,19.824764728546146)["building"];out body;
+[HTTP/1.1 200 OK 271ms]
+
+Nearest building data: 
+Object { type: "way", id: 43645340, nodes: (15) […], tags: {…} }
+building-management.js:62:25
+XHRGET
+https://overpass-api.de/api/interpreter?data=[out:json];node(551962771);out body;
+[HTTP/1.1 200 OK 130ms]
+
+XHRGET
+https://overpass-api.de/api/interpreter?data=[out:json];node(551962644);out body;
+[HTTP/1.1 200 OK 536ms]
+
+XHRGET
+https://overpass-api.de/api/interpreter?data=[out:json];node(551963004);out body;
+[HTTP/1.1 200 OK 4143ms]
+
+XHRGET
+https://overpass-api.de/api/interpreter?data=[out:json];node(551963038);out body;
+[HTTP/1.1 200 OK 334ms]
+
+XHRGET
+https://overpass-api.de/api/interpreter?data=[out:json];node(551963062);out body;
+[HTTP/1.1 200 OK 329ms]
+
+XHRGET
+https://overpass-api.de/api/interpreter?data=[out:json];node(551963126);out body;
+[HTTP/1.1 200 OK 5198ms]
+
+XHRGET
+https://overpass-api.de/api/interpreter?data=[out:json];node(551963224);out body;
+[HTTP/1.1 200 OK 340ms]
+
+XHRGET
+https://overpass-api.de/api/interpreter?data=[out:json];node(551963561);out body;
+[HTTP/1.1 200 OK 8472ms]
+
+XHRGET
+https://overpass-api.de/api/interpreter?data=[out:json];node(551963322);out body;
+[HTTP/1.1 200 OK 8557ms]
+
+XHRGET
+https://overpass-api.de/api/interpreter?data=[out:json];node(551963203);out body;
+[HTTP/1.1 200 OK 8557ms]
+
+XHRGET
+https://overpass-api.de/api/interpreter?data=[out:json];node(551963163);out body;
+[HTTP/1.1 200 OK 7131ms]
+
+XHRGET
+https://overpass-api.de/api/interpreter?data=[out:json];node(551963087);out body;
+[HTTP/1.1 200 OK 5146ms]
+
+XHRGET
+https://overpass-api.de/api/interpreter?data=[out:json];node(551963025);out body;
+[HTTP/1.1 200 OK 5244ms]
+
+XHRGET
+https://overpass-api.de/api/interpreter?data=[out:json];node(551963309);out body;
+[HTTP/1.1 200 OK 8693ms]
+
+XHRGET
+https://overpass-api.de/api/interpreter?data=[out:json];node(551962771);out body;
+[HTTP/1.1 200 OK 5374ms]
+
+XHRGET
+https://georulers.com/php/fetch.php
+[HTTP/2 200  34ms]
+
+Fetched buildings: 
+Array(38) [ {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, … ]
+building-management.js:235:17
+XHRGET
+https://georulers.com/php/fetch.php
+[HTTP/2 200  35ms]
+
+Fetched buildings: 
+Array(38) [ {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, … ]
+building-management.js:235:17
+XHRPOST
+https://georulers.com/php/submit.php
+[HTTP/2 200  33ms]
+
+Save Building Response: {"success":true} building-management.js:118:17
+Building saved: 
+Object { success: true }
+building-management.js:122:25
+XHRGET
+https://georulers.com/php/fetch.php
+[HTTP/2 200  34ms]
+
+Fetched buildings: 
+Array(39) [ {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, … ]
+building-management.js:235:17
+
+​
+

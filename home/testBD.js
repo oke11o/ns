@@ -20,17 +20,47 @@ function logMessage(message) {
 
 logMessage("Firebase initialized.");
 
-// Прослушивание изменений в коллекции "buildings"
-db.collection("buildings").onSnapshot((snapshot) => {
+function writeTestMessage() {
+    var now = new Date();
+    var timestamp = now.toISOString();
+    db.collection("test_messages").add({
+        message: "Привет, как слышно, прием прием",
+        timestamp: timestamp
+    })
+    .then((docRef) => {
+        logMessage("Test message written with ID: " + docRef.id);
+    })
+    .catch((error) => {
+        logMessage("Error adding test message: " + error);
+    });
+}
+
+writeTestMessage();
+
+// Загрузка данных из коллекции test_messages
+function loadMessages() {
+    db.collection("test_messages").get().then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+            logMessage(`Document data: ${JSON.stringify(doc.data())}`);
+        });
+    }).catch((error) => {
+        logMessage("Error getting documents: " + error);
+    });
+}
+
+loadMessages();
+
+// Прослушивание изменений в коллекции test_messages
+db.collection("test_messages").onSnapshot((snapshot) => {
     snapshot.docChanges().forEach((change) => {
         if (change.type === "added") {
-            logMessage(`New building: ${JSON.stringify(change.doc.data())}`);
+            logMessage(`New message: ${JSON.stringify(change.doc.data())}`);
         }
         if (change.type === "modified") {
-            logMessage(`Modified building: ${JSON.stringify(change.doc.data())}`);
+            logMessage(`Modified message: ${JSON.stringify(change.doc.data())}`);
         }
         if (change.type === "removed") {
-            logMessage(`Removed building: ${change.doc.id}`);
+            logMessage(`Removed message: ${change.doc.id}`);
         }
     });
 });
